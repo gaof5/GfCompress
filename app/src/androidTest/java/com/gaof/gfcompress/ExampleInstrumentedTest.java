@@ -1,4 +1,4 @@
-package com.gaof.huffmanpic;
+package com.gaof.gfcompress;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

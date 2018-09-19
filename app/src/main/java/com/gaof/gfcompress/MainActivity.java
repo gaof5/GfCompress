@@ -1,8 +1,6 @@
-package com.gaof.huffmanpic;
+package com.gaof.gfcompress;
 
 import android.Manifest;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,16 +8,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gaof.compress.CompressionPredicate;
 import com.gaof.compress.GfCompress;
 import com.gaof.compress.OnCompressListener;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,41 +69,13 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(File file) {
+                        Toast.makeText(MainActivity.this,"压缩成功："+file.getAbsolutePath(),Toast.LENGTH_LONG).show();
                         Log.e(TAG, file.getAbsolutePath());
                     }
 
                     @Override
                     public void onError(Throwable e) { }
                 }).launch();
-
-//        compress(inputBitmap,output.getAbsolutePath());
-    }
-
-//    public native void compress(Bitmap bitmap,String path);
-
-    private int computeSize() {
-        srcWidth = srcWidth % 2 == 1 ? srcWidth + 1 : srcWidth;
-        srcHeight = srcHeight % 2 == 1 ? srcHeight + 1 : srcHeight;
-
-        int longSide = Math.max(srcWidth, srcHeight);
-        int shortSide = Math.min(srcWidth, srcHeight);
-
-        float scale = ((float) shortSide / longSide);
-        if (scale <= 1 && scale > 0.5625) {
-            if (longSide < 1664) {
-                return 1;
-            } else if (longSide < 4990) {
-                return 2;
-            } else if (longSide > 4990 && longSide < 10240) {
-                return 4;
-            } else {
-                return longSide / 1280 == 0 ? 1 : longSide / 1280;
-            }
-        } else if (scale <= 0.5625 && scale > 0.5) {
-            return longSide / 1280 == 0 ? 1 : longSide / 1280;
-        } else {
-            return (int) Math.ceil(longSide / (1280.0 / scale));
-        }
     }
 
     private String getPath() {

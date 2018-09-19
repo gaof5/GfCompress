@@ -1,4 +1,4 @@
-package com.gaof.huffmanpic;
+package com.gaof.gfcompress;
 
 import org.junit.Test;
 
