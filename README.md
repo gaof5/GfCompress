@@ -24,11 +24,11 @@ Step 2. Add the dependency
 	}
 
 
-#使用说明
+# 使用说明
 
- 1.图片压缩前自行配置读写权限
+ 1. 图片压缩前自行配置读写权限
 
- 2.进行压缩
+ 2. 进行压缩
 	GfCompress.with(this)
 		.load(file)//待压缩图片
 		.ignoreBy(100)//100k内不进行压缩
